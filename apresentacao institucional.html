@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[EDITAR - Nome Iniciativa] - Apresentação Institucional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* CORES SIRIUS - Slate + Sky */
+            --bg-base: #0f172a;
+            --bg-elevated: #020617;
+            --bg-surface: #1e293b;
+            --bg-muted: #334155;
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            
+            --primary: #0284c7;
+            --primary-light: #38bdf8;
+            
+            --font-display: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-content: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-content);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: var(--bg-base);
+            min-height: 100vh;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16/9;
+            margin: 20px auto;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            page-break-after: always;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+        }
+
+        .slide.title-slide {
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.light-bg {
+            background-color: var(--bg-surface);
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--text-accent);
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--text-accent);
+        }
+
+        .slide h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-accent);
+        }
+
+        .slide p {
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .slide li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .slide strong {
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .card {
+            background-color: var(--bg-surface);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--text-accent);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--bg-surface);
+            border-radius: 8px;
+            margin: 10px;
+            flex: 1;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-accent);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .metrics-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: var(--text-accent);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--bg-base);
+            font-size: 0.75rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .button {
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .button-primary {
+            background-color: var(--text-accent);
+            color: var(--bg-base);
+        }
+
+        .button-primary:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            border: 2px solid var(--text-accent);
+        }
+
+        .button-secondary:hover {
+            background-color: var(--bg-muted);
+            transform: translateY(-2px);
+        }
+
+        /* Modo Print/PDF */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .slide {
+                page-break-after: always;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                padding: 40px;
+                border-radius: 0;
+            }
+
+            .presentation-container {
+                gap: 0;
+                padding: 0;
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px;
+                max-width: 100%;
+            }
+
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+
+            .slide h2 {
+                font-size: 2rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .highlight {
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--text-accent);
+        }
+
+        .separator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--text-accent), transparent);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <!-- ============================================
+         SLIDE 1: CAPA
+         ============================================ -->
+    <section class="slide title-slide">
+        <div style="text-align: center; width: 100%;">
+            <div class="logo-placeholder" style="margin: 0 auto 30px;">Logo</div>
+            <h1>[EDITAR - NOME DA INICIATIVA]</h1>
+            <p class="subtitle">Transformando realidades através de [seu propósito principal]</p>
+            <p class="tagline">[EDITAR - Cidade] | [EDITAR - Ano de Criação]</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 2: QUEM SOMOS
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Quem Somos</h2>
+        <div class="separator"></div>
+        
+        <div class="two-column">
+            <div class="column">
+                <h3>Missão</h3>
+                <p>[EDITAR - Copiar do Bloco 10: Proposta de Valor]</p>
+            </div>
+            <div class="column">
+                <h3>Visão</h3>
+                <p>[EDITAR - Copiar do Bloco 7: Visão de Impacto]</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Valores</h3>
+        <ul>
+            <li>[EDITAR - Valor 1]</li>
+            <li>[EDITAR - Valor 2]</li>
+            <li>[EDITAR - Valor 3]</li>
+        </ul>
+
+        <div class="footer">Slide 2</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 3: CONTEXTO E PROBLEMA
+         ============================================ -->
+    <section class="slide">
+        <h2>O Cenário em que Atuamos</h2>
+        <div class="separator"></div>
+
+        <h3>Contexto</h3>
+        <p>[EDITAR - Copiar do Bloco 1: Descrição do bloco]</p>
+
+        <h3 style="margin-top: 30px;">Dados que Fundamentam</h3>
+        <p><span class="highlight">[EDITAR - Dado 1]</span> — segundo [fonte]</p>
+        <p><span class="highlight">[EDITAR - Dado 2]</span> — mostra que...</p>
+        <p><span class="highlight">[EDITAR - Dado 3]</span> — indicando...</p>
+
+        <div class="footer">Slide 3</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 4: PÚBLICO-ALVO
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Quem Impactamos</h2>
+        <div class="separator"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; margin-top: 40px;">
+            <div class="card">
+                <h3>👥 [EDITAR - Público 1]</h3>
+                <p>[EDITAR - Descrição breve]</p>
+            </div>
+            <div class="card">
+                <h3>👥 [EDITAR - Público 2]</h3>
+                <p>[EDITAR - Descrição breve]</p>
+            </div>
+            <div class="card">
+                <h3>👥 [EDITAR - Público 3]</h3>
+                <p>[EDITAR - Descrição breve]</p>
+            </div>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 0.95rem; color: var(--text-muted);">
+            Como chegamos nesses públicos: [EDITAR - Métodos de escuta/pesquisa do Bloco 2]
+        </p>
+
+        <div class="footer">Slide 4</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 5: COMO ATUAMOS
+         ============================================ -->
+    <section class="slide">
+        <h2>Nossas Intervenções</h2>
+        <div class="separator"></div>
+
+        <p style="margin-bottom: 30px; color: var(--text-secondary);">Trabalhamos através de 4 frentes principais:</p>
+
+        <ul style="font-size: 1.2rem;">
+            <li><strong style="color: var(--text-accent);">1. [EDITAR - Intervenção 1]</strong><br>
+                <span style="font-size: 1rem; color: var(--text-muted);">[EDITAR - Descrição breve]</span></li>
+            <li style="margin-top: 15px;"><strong style="color: var(--text-accent);">2. [EDITAR - Intervenção 2]</strong><br>
+                <span style="font-size: 1rem; color: var(--text-muted);">[EDITAR - Descrição breve]</span></li>
+            <li style="margin-top: 15px;"><strong style="color: var(--text-accent);">3. [EDITAR - Intervenção 3]</strong><br>
+                <span style="font-size: 1rem; color: var(--text-muted);">[EDITAR - Descrição breve]</span></li>
+            <li style="margin-top: 15px;"><strong style="color: var(--text-accent);">4. [EDITAR - Intervenção 4]</strong><br>
+                <span style="font-size: 1rem; color: var(--text-muted);">[EDITAR - Descrição breve]</span></li>
+        </ul>
+
+        <div class="footer">Slide 5</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 6: O QUE ENTREGAMOS
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Saídas e Resultados Diretos</h2>
+        <div class="separator"></div>
+
+        <div class="metrics-row">
+            <div class="metric">
+                <div class="metric-number">[EDITAR]</div>
+                <div class="metric-label">Pessoas Impactadas</div>
+            </div>
+            <div class="metric">
+                <div class="metric-number">[EDITAR]</div>
+                <div class="metric-label">Eventos Realizados</div>
+            </div>
+            <div class="metric">
+                <div class="metric-number">[EDITAR]</div>
+                <div class="metric-label">Horas de Formação</div>
+            </div>
+            <div class="metric">
+                <div class="metric-number">[EDITAR]</div>
+                <div class="metric-label">Produtos Gerados</div>
+            </div>
+        </div>
+
+        <p style="color: var(--text-secondary); margin-top: 40px;">
+            <strong>Período medido:</strong> [EDITAR - Período] | <strong>Fonte:</strong> [EDITAR - Como é coletado]
+        </p>
+
+        <div class="footer">Slide 6</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 7: RESULTADOS CURTO PRAZO
+         ============================================ -->
+    <section class="slide">
+        <h2>Transformações Iniciais</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">O que muda durante ou logo após a participação</p>
+        <div class="separator"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div class="card" style="border-left-color: var(--text-accent);">
+                <h3>✨ [EDITAR - Resultado 1]</h3>
+                <p>[EDITAR - Descrição do resultado esperado]</p>
+            </div>
+            <div class="card" style="border-left-color: var(--text-accent);">
+                <h3>✨ [EDITAR - Resultado 2]</h3>
+                <p>[EDITAR - Descrição do resultado esperado]</p>
+            </div>
+            <div class="card" style="border-left-color: var(--text-accent);">
+                <h3>✨ [EDITAR - Resultado 3]</h3>
+                <p>[EDITAR - Descrição do resultado esperado]</p>
+            </div>
+            <div class="card" style="border-left-color: var(--text-accent);">
+                <h3>✨ [EDITAR - Resultado 4]</h3>
+                <p>[EDITAR - Descrição do resultado esperado]</p>
+            </div>
+        </div>
+
+        <div class="footer">Slide 7</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 8: RESULTADOS MÉDIO PRAZO
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Impactos Sustentados</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Mudanças que se consolidam com o tempo</p>
+        <div class="separator"></div>
+
+        <ul style="font-size: 1.15rem;">
+            <li><strong>[EDITAR - Resultado Médio Prazo 1]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 1rem;">[EDITAR - Como isso se concretiza]</span></li>
+            <li style="margin-top: 20px;"><strong>[EDITAR - Resultado Médio Prazo 2]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 1rem;">[EDITAR - Como isso se concretiza]</span></li>
+            <li style="margin-top: 20px;"><strong>[EDITAR - Resultado Médio Prazo 3]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 1rem;">[EDITAR - Como isso se concretiza]</span></li>
+        </ul>
+
+        <div class="footer">Slide 8</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 9: VISÃO DE IMPACTO
+         ============================================ -->
+    <section class="slide">
+        <h2>Nosso Impacto Maior</h2>
+        <div class="separator"></div>
+
+        <div style="background-color: rgba(56, 189, 248, 0.15); padding: 40px; border-radius: 8px; border-left: 6px solid var(--text-accent); margin-top: 40px;">
+            <p style="font-size: 1.3rem; line-height: 2; color: var(--text-primary);">
+                "[EDITAR - Copiar Bloco 7: Visão de Impacto - texto completo]"
+            </p>
+        </div>
+
+        <p style="margin-top: 40px; color: var(--text-muted);">
+            Essa visão foi construída através de: escuta comunitária, análise de dados, validação com stakeholders.
+        </p>
+
+        <div class="footer">Slide 9</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 10: OPORTUNIDADE DE MERCADO
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Por Que Agora?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Tendências que apoiam nossa atuação</p>
+        <div class="separator"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; margin-top: 40px;">
+            <div class="card">
+                <h3>📈 Tendência 1</h3>
+                <p>[EDITAR - Descrição tendência do Bloco 8]</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 15px;">[EDITAR - Dado/Estatística]</p>
+            </div>
+            <div class="card">
+                <h3>📈 Tendência 2</h3>
+                <p>[EDITAR - Descrição tendência do Bloco 8]</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 15px;">[EDITAR - Dado/Estatística]</p>
+            </div>
+            <div class="card">
+                <h3>📈 Tendência 3</h3>
+                <p>[EDITAR - Descrição tendência do Bloco 8]</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 15px;">[EDITAR - Dado/Estatística]</p>
+            </div>
+        </div>
+
+        <div class="footer">Slide 10</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 11: NOSSA EQUIPE
+         ============================================ -->
+    <section class="slide">
+        <h2>Quem Faz Acontecer</h2>
+        <div class="separator"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
+            <div>
+                <h3>Profissionais</h3>
+                <ul>
+                    <li><strong>[EDITAR - Cargo 1]</strong> - [EDITAR - Quantidade] pessoas</li>
+                    <li><strong>[EDITAR - Cargo 2]</strong> - [EDITAR - Quantidade] pessoas</li>
+                    <li><strong>[EDITAR - Cargo 3]</strong> - [EDITAR - Quantidade] pessoas</li>
+                    <li><strong>[EDITAR - Cargo 4]</strong> - [EDITAR - Quantidade] pessoas</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Competências Centrais</h3>
+                <ul>
+                    <li>🎨 <strong>Artística</strong><br>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">[EDITAR - O que faz diferença]</span></li>
+                    <li style="margin-top: 15px;">⚙️ <strong>Gestão</strong><br>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">[EDITAR - O que faz diferença]</span></li>
+                    <li style="margin-top: 15px;">💻 <strong>Técnica</strong><br>
+                        <span style="font-size: 0.95rem; color: var(--text-secondary);">[EDITAR - O que faz diferença]</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">Slide 11</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 12: PARCEIROS
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Rede que Fortalece o Impacto</h2>
+        <div class="separator"></div>
+
+        <p style="margin-bottom: 30px; color: var(--text-secondary);">Trabalhamos com:</p>
+
+        <ul style="font-size: 1.1rem; margin-top: 30px;">
+            <li><strong style="color: var(--text-accent);">🏫 [EDITAR - Tipo Parceiro 1]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 0.95rem;">[EDITAR - Exemplos específicos]</span></li>
+            <li style="margin-top: 20px;"><strong style="color: var(--text-accent);">🤝 [EDITAR - Tipo Parceiro 2]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 0.95rem;">[EDITAR - Exemplos específicos]</span></li>
+            <li style="margin-top: 20px;"><strong style="color: var(--text-accent);">🎓 [EDITAR - Tipo Parceiro 3]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 0.95rem;">[EDITAR - Exemplos específicos]</span></li>
+            <li style="margin-top: 20px;"><strong style="color: var(--text-accent);">🌐 [EDITAR - Tipo Parceiro 4]</strong><br>
+                <span style="color: var(--text-secondary); font-size: 0.95rem;">[EDITAR - Exemplos específicos]</span></li>
+        </ul>
+
+        <div class="footer">Slide 12</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 13: PROPOSTA DE VALOR
+         ============================================ -->
+    <section class="slide">
+        <h2>Por Que Nos Escolher</h2>
+        <div class="separator"></div>
+
+        <div style="background-color: var(--bg-surface); padding: 40px; border-radius: 8px; margin-top: 40px; border: 2px solid var(--text-accent);">
+            <h3 style="font-size: 1.3rem; margin-bottom: 20px;">Nossa Proposta</h3>
+            <p style="font-size: 1.15rem; line-height: 1.8;">
+                "[EDITAR - Copiar Bloco 10: Proposta de Valor]"
+            </p>
+        </div>
+
+        <h3 style="margin-top: 40px;">Diferenciais</h3>
+        <ul>
+            <li>[EDITAR - Diferencial 1]</li>
+            <li>[EDITAR - Diferencial 2]</li>
+            <li>[EDITAR - Diferencial 3]</li>
+        </ul>
+
+        <div class="footer">Slide 13</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 14: COMO NOS SUSTENTAMOS
+         ============================================ -->
+    <section class="slide light-bg">
+        <h2>Fontes de Receita</h2>
+        <div class="separator"></div>
+
+        <p style="margin-bottom: 30px; color: var(--text-secondary);">Diversificação garante sustentabilidade</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div class="card">
+                <h3>[EDITAR - Fonte 1]</h3>
+                <p style="font-size: 1.5rem; color: var(--text-accent); font-weight: 700; margin-bottom: 10px;">[EDITAR - %]</p>
+                <p style="font-size: 0.95rem;">[EDITAR - Como é capturada]</p>
+            </div>
+            <div class="card">
+                <h3>[EDITAR - Fonte 2]</h3>
+                <p style="font-size: 1.5rem; color: var(--text-accent); font-weight: 700; margin-bottom: 10px;">[EDITAR - %]</p>
+                <p style="font-size: 0.95rem;">[EDITAR - Como é capturada]</p>
+            </div>
+            <div class="card">
+                <h3>[EDITAR - Fonte 3]</h3>
+                <p style="font-size: 1.5rem; color: var(--text-accent); font-weight: 700; margin-bottom: 10px;">[EDITAR - %]</p>
+                <p style="font-size: 0.95rem;">[EDITAR - Como é capturada]</p>
+            </div>
+            <div class="card">
+                <h3>[EDITAR - Fonte 4]</h3>
+                <p style="font-size: 1.5rem; color: var(--text-accent); font-weight: 700; margin-bottom: 10px;">[EDITAR - %]</p>
+                <p style="font-size: 0.95rem;">[EDITAR - Como é capturada]</p>
+            </div>
+            <div class="card">
+                <h3>[EDITAR - Fonte 5]</h3>
+                <p style="font-size: 1.5rem; color: var(--text-accent); font-weight: 700; margin-bottom: 10px;">[EDITAR - %]</p>
+                <p style="font-size: 0.95rem;">[EDITAR - Como é capturada]</p>
+            </div>
+        </div>
+
+        <div class="footer">Slide 14</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 15: COMO VOCÊ PODE CONTRIBUIR
+         ============================================ -->
+    <section class="slide">
+        <h2>Como Você Pode Contribuir</h2>
+        <div class="separator"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; margin-top: 40px;">
+            <div class="card" style="text-align: center;">
+                <h3 style="font-size: 1.3rem; text-align: left;">💚 Como Apoiador</h3>
+                <ul style="margin-left: 0; text-align: left;">
+                    <li>Doações pontuais</li>
+                    <li>Apoio mensal</li>
+                    <li>Patrocínios</li>
+                </ul>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="font-size: 1.3rem; text-align: left;">🤝 Como Parceiro</h3>
+                <ul style="margin-left: 0; text-align: left;">
+                    <li>Co-produção</li>
+                    <li>Parcerias</li>
+                    <li>Troca de conhecimento</li>
+                </ul>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="font-size: 1.3rem; text-align: left;">👥 Como Participante</h3>
+                <ul style="margin-left: 0; text-align: left;">
+                    <li>Participar de atividades</li>
+                    <li>Indicar amigos</li>
+                    <li>Ser voluntário</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">Slide 15</div>
+    </section>
+
+    <!-- ============================================
+         SLIDE 16: CONTATO
+         ============================================ -->
+    <section class="slide title-slide">
+        <div style="text-align: center; width: 100%;">
+            <h2 style="color: var(--text-accent); margin-bottom: 40px;">Vamos Conversar</h2>
+            
+            <div style="background-color: var(--bg-surface); padding: 50px; border-radius: 8px; margin-bottom: 40px; border: 2px solid var(--text-accent);">
+                <p style="font-size: 1.3rem; margin-bottom: 15px;"><strong style="color: var(--text-primary);">[EDITAR - NOME DA INICIATIVA]</strong></p>
+                <p style="font-size: 1.1rem; margin: 10px 0;"><strong>📍</strong> [EDITAR - Endereço]</p>
+                <p style="font-size: 1.1rem; margin: 10px 0;"><strong>📞</strong> [EDITAR - Telefone]</p>
+                <p style="font-size: 1.1rem; margin: 10px 0;"><strong>📧</strong> [EDITAR - Email]</p>
+                <p style="font-size: 1.1rem; margin: 10px 0;"><strong>🌐</strong> [EDITAR - Website]</p>
+                <p style="font-size: 1.1rem; margin: 10px 0;"><strong>📱</strong> [EDITAR - Redes Sociais]</p>
+            </div>
+
+            <p style="color: var(--text-muted); font-style: italic;">
+                "Escuta atenta | Excelência | Impacto Social"
+            </p>
+        </div>
+    </section>
+
+</div>
+
+<!-- INSTRUÇÕES DE USO (não aparece na impressão) -->
+<script>
+    console.log(`
+    ╔════════════════════════════════════════════════════════════╗
+    ║  INSTRUÇÕES DE PERSONALIZAÇÃO - APRESENTAÇÃO SIRIUS        ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    1. EDITAR CONTEÚDO:
+       - Procure por [EDITAR - ...] no código
+       - Substitua pelos dados do seu Modelo C
+       - Use Ctrl+F para navegar rápido
+
+    2. CORES:
+       - Fundo Base: #0f172a (azul bem escuro)
+       - Texto Accent: #38bdf8 (azul céu)
+       - Todas já estão configuradas em :root
+
+    3. SALVAR/EXPORTAR:
+       - SALVAR HTML: Ctrl+S em qualquer editor
+       - ABRIR NO NAVEGADOR: Clique 2x no arquivo .html
+       - IMPRIMIR COMO PDF: Ctrl+P > Salvar como PDF
+       - POWERPOINT: Imprima PDF, importe slides
+
+    4. CUSTOMIZAR DESIGN:
+       - Altere cores em :root {}
+       - Mude fontes na secção @font-family
+       - Ajuste tamanhos conforme necessário
+
+    5. ADICIONAR SLIDES:
+       - Copie uma <section class="slide"> completa
+       - Cole após a última seção
+       - Modifique conteúdo conforme precisar
+
+    6. TIPS:
+       - Use emojis para visual mais atrativo (✨, 📈, 🎯, etc)
+       - Mantenha texto curto e impactante
+       - Use cores de destaque para números/dados importantes
+
+    ═══════════════════════════════════════════════════════════
+    Documentação completa em: 01_apresentacao-modelo-html.md
+    ═══════════════════════════════════════════════════════════
+    `);
+</script>
+
+</body>
+</html>
