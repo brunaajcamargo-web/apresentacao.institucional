@@ -776,9 +776,19 @@
     `);
 </script>
 
-<!-- Rodapé/Créditos -->
+<!-- Com ícone -->
+<footer style="text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ccc; color: #666; font-size: 14px;">
+    <p>© 2026 | Template de apresentação institucional desenvolvido por <strong>Tarimbo Cultural</strong></p>
+</footer>
+
+<!-- Com data automática -->
 <footer style="text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ccc; color: #666; font-size: 12px;">
-    <p>Template de apresentação institucional desenvolvido por Tarimbo Cultural</p>
-</footer></body>
+    <p>Template de apresentação institucional desenvolvido por Tarimbo Cultural | © <span id="year"></span></p>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</footer>
+</body>
 </html>
+
 
